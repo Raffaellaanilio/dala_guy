@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guyana</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://kit.fontawesome.com/91822fdb88.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+    
+
+        #info {
+            width:40%;
+            height:80%;
+            position: absolute;
+            top:12%;
+            left:60%;
+            overflow-y:auto;
+            z-index:1000;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Maven Pro';
+            background-color: #535355;
+        }
+
+        #map {
+            position: absolute;
+            top: 10%;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #toc {
+            top: 12%;
+            left: 1%;
+            height: 80vh;
+            position: absolute;
+            width: 30%;
+            padding-top: 10%;
+            background-color: rgba(255, 255, 255, 1);
+            padding: 15px;
+            border-radius: 1%;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1.5px 5px 0 rgba(0, 0, 0, 0.19);
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .row_titulo {
+            font-size: medium;
+            line-height: 1;
+            background-color: gainsboro;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .row_titulo:hover {
+            background-color: #eaebed;
+        }
+
+        .row {
+            width: -webkit-fill-available;
+        }
+
+        .row_leyenda {
+            padding: 5px 10px;
+        }
+
+        .mapboxgl-popup-content {
+            font-family: 'Maven Pro'
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div id="info" class="card" style="display:none">
+            <div class="card-header">Metodología DaLA<i style="float: right;" id="icono_cerrar" class="fas fa-times-circle"></i></div>
+            <div class="card-body"> La Metodología de Evaluación de Daños, Pérdidas y Necesidades, fue
+                desarrollada en la década de 1970 por la Comisión Económica para América Latina y el Caribe
+                de las Naciones Unidas (CEPAL). El uso sistemático de esta metodología permite cuantificar el impacto socioeconómico de cualquier desastre, así como los activos de cualquier sector que se encuentren expuestos a
+                desastre. También refuerza la capacidad de recuperación mediante la promoción de los principios
+                de “Reconstruir Mejor” en los esfuerzos de reconstrucción y recuperación. </br></br>
+                Las evaluaciones permiten estimar, en primer lugar, las intervenciones que el gobierno afectado
+                deberá realizar en el corto plazo para iniciar la recuperación y, en segundo lugar, las necesidades
+                financieras para lograr la recuperación, la reconstrucción y la gestión o reducción del riesgo de
+                desastres en general. </br></br>El producto final de la evaluación debe ser un programa integral de recuperación económica, reconstrucción y reducción de riesgos que deberá orientar todas las actividades
+                en un país en desarrollo después de un desastre. </br></br><a href="http://documents1.worldbank.org/curated/en/898761468333305766/pdf/880860SPANISH0010B00PUBLIC00Spanish.pdf">Más información</a></br></br>
+                <div class="card">
+       <!--      <div class="card-footer">Instituciones Colaboradoras de Información</div>
+            <div class="card-body">
+                -Inversión Estratégica de Honduras (InvestH) </br>
+                -Secretaría de Infraestructura y Servicios Públicos (INSEP) </br>
+                -Secretaría de Salud </br>
+                -General Redes Integradas de Servicios de Salud"</br>
+                -Comisión Permanente de Contingencias (COPECO) </br>
+                -Secretaría de Educación</br>
+                -Secretaría de Coordinación General de Gobierno</br>
+                -Instituto Nacional de Estadística</br>
+                -Secretaría de Agricultura y Ganadería (INFOAGRO)</br>
+                -Secretaría de Finanzas (SEFIN)</br>
+                -Organización de las Naciones Unidas para la Alimentación y la Agricultura (FAO)</br>
+            </div> -->
+        </div>
+        </div>
+</div>
+
+    <div id="encabezado" class="row" style="height: 10vh; width: 60%;">
+        <div class="col-2" style="padding: 10px 40px;">
+            <img src="logo-cepal.png" height="50px">
+        </div>
+        <div class="col-9 text-center">
+            <h5 style="color: whitesmoke;">DaLA (Evaluación de Daños, Pérdidas y Necesidades) <i data-toggle="tooltip" data-placement="top" id="icono_info" title="Acerca de la Metodología DaLA" class="fas fa-info-circle"></i></h5>
+            <p style="color: whitesmoke;">Guyana 2021</p>
+        </div>
+    </div>
+    <div id="map"></div>
+    <div id="toc">
+        <div class="row">
+            <div data-toggle="collapse" href="#colapsarc1" class="col-12 row_titulo">C1 Eventos<h6 style="float:right;" class="badge badge-secondary">6</h6></div>
+            <div id="colapsarc1" class="collapse">
+                <h6>Huracán Eta</h6>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('trayectoria_eta')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Trayectoria</div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">NOAA, 2020</div>
+                </div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('estado_tormenta_eta')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Estado de Tormenta</div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">NOAA, 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_estado_tormenta_eta" style="display:none;"></div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('velocidad_viento_eta')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Velocidad del Viento</div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">NOAA, 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_velocidad_viento_eta" style="display:none;"></div>
+                <h6>Huracán Iota</h6>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('trayectoria_iota')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Trayectoria</div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">NOAA, 2020</div>
+                </div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('estado_tormenta_iota')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Estado de Tormenta</div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">NOAA, 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_estado_tormenta_iota" style="display:none;"></div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('velocidad_viento_iota')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Velocidad del Viento</div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">NOAA, 2020</div>
+                    <div class="row row_leyenda" id="leyenda_velocidad_viento_iota" style="display:none;"></div>
+                </div>
+            </div>
+            <div data-toggle="collapse" href="#colapsarc2" class="col-12 row_titulo">C2 Población afectada<h6 style="float:right;" class="badge badge-secondary">4</h6></div>
+            <div id="colapsarc2" class="collapsed">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('area_afectada')" checked></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Zonas Inundadas</div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">UNOSAT, 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_area_afectada" style="display:inline-flex;"></div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('albergues')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Albergues
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">27/11/2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_albergues" style="display:none;"></div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('albergues_afectados')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Albergues Afectados
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">Diciembre 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_albergues_afectados" style="display:none;"></div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('eta_iota_afectaciones_infraestructura')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Afectaciones Infraestructura Eta/Iota
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">COPECO</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_eta_iota_afectaciones_infraestructura" style="display:none;"></div>
+            </div>
+            <div data-toggle="collapse" href="#colapsarc3" class="col-12 row_titulo">C3 Educación<h6 style="float:right;" class="badge badge-secondary">2</h6></div>
+            <div id="colapsarc3" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('establecimientos_educativos')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Establecimientos Educativos
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">Noviembre 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_establecimientos_educativos" style="display:none;"></div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('establecimientos_educativos_afectados')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Establecimientos Educativos Afectados
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">Diciembre 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_establecimientos_educativos_afectados" style="display:none;"></div> 
+            </div>     
+            <div data-toggle="collapse" href="#colapsarc4" class="col-12 row_titulo">C4 Salud<h6 style="float:right;" class="badge badge-secondary">1</h6></div>
+            <div id="colapsarc4" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('unidades_salud')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Unidades de Salud
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">Noviembre 2020</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_unidades_salud" style="display:none;"></div>        
+
+            </div>
+            <div data-toggle="collapse" href="#colapsarc5" class="col-12 row_titulo">C5 Vivienda<h6 style="float:right;" class="badge badge-secondary">1</h6></div>
+            <div id="colapsarc5" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('municipios')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Porcentaje de viviendas en mal estado por municipio
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">Año 2013</div>
+                </div>
+            </div>
+            <div class="row row_leyenda" id="leyenda_municipios" style="display:none;"></div> 
+            <div data-toggle="collapse" href="#colapsarc6" class="col-12 row_titulo">C6 Agua y saneamiento<h6 style="float:right;" class="badge badge-secondary">2</h6></div>
+            <div id="colapsarc6" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('sistemas_agua')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Sistemas de agua
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">SIASAR Honduras</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_sistemas_agua" style="display:none;"></div>
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('sistemas_residuos')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Sistemas Residuos                        
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">SIASAR Honduras</div>
+                </div>
+                <div class="row row_leyenda" id="leyenda_sistemas_residuos" style="display:none;"></div>
+            </div>            
+            <div data-toggle="collapse" href="#colapsarc7" class="col-12 row_titulo">C7 Electricidad<h6 style="float:right;" class="badge badge-secondary">1</h6></div>
+            <div id="colapsarc7" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('red_electrica_sanpedrosula')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Red Eléctrica San Pedro Sula
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">COPECO</div>
+                </div>
+            </div>
+            <div class="row row_leyenda" id="leyenda_red_electrica_sanpedrosula" style="display:none;"></div>
+            <div data-toggle="collapse" href="#colapsarc8" class="col-12 row_titulo">C8 Telecomunicaciones<h6 style="float:right;" class="badge badge-secondary">0</h6></div>
+            <div data-toggle="collapse" href="#colapsarc9" class="col-12 row_titulo">C9 Transporte y Vialidad<h6 style="float:right;" class="badge badge-secondary">1</h6></div>
+            <div id="colapsarc9" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('afectaciones_vial_investh')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Afectaciones viales INVESTH
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">25/11/2020</div>
+                </div>
+            </div>
+            <div class="row row_leyenda" id="leyenda_afectaciones_vial_investh" style="display:none;"></div>
+            <div data-toggle="collapse" href="#colapsarc10" class="col-12 row_titulo">C10 Agricultura<h6 style="float:right;" class="badge badge-secondary">1</h6></div>
+            <div id="colapsarc10" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('cobertura_inundada_agricultura')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Cobertura inundada agricultura
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">UNOSAT, ICF, FAO</div>
+                </div>
+            </div>
+            <div class="row row_leyenda" id="leyenda_cobertura_inundada_agricultura" style="display:none;"></div>
+            <div data-toggle="collapse" href="#colapsarc11" class="col-12 row_titulo">C11 Turismo y comercio<h6 style="float:right;" class="badge badge-secondary">0</h6></div>
+            <div data-toggle="collapse" href="#colapsarc12" class="col-12 row_titulo">C12 Medio Ambiente<h6 style="float:right;" class="badge badge-secondary">1</h6></div>
+            <div id="colapsarc12" class="collapse">
+                <div class="row" style="padding: 5px;">
+                    <div class="col-1" style="font-size: small;line-height: 1;"><input type="checkbox"
+                            onchange="encendido('cobertura_inundada_medioambiente')"></div>
+                    <div class="col-7" style="font-size: small;line-height: 1;">Cobertura inundada medio ambiente
+                    </div>
+                    <div class="col-3" style="font-size: small;line-height: 1;">FAO</div>
+                    <div class="row row_leyenda" id="leyenda_cobertura_inundada_medioambiente" style="display:none;">
+                    </div>
+                </div>
+            </div>
+            <div data-toggle="collapse" href="#colapsarc13" class="col-12 row_titulo">C13 Impacto macroeconómico<h6 style="float:right;" class="badge badge-secondary">0</h6></div>
+    </div>
+
+</body>
+<script>
+    $(document).ready(function () {
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGNhc3RlbGxhcm8iLCJhIjoiY2lrazJvZHFrMDl1eXYwa202Z2Njczk1eiJ9.fIBpy-XcIN0kKSuIx6oReA';
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            center: [-88, 14.615], // starting position [lng, lat]/
+            zoom: 6.4 // starting zoom
+        });
+        map.addControl(new mapboxgl.NavigationControl());
+
+        map.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            })
+        );
+        map.on('load', function () {
+            var url_muni = './municipios.geojson';
+            map.addSource('municipios', {
+                type: 'geojson',
+                data: url_muni
+            });
+            map.addLayer({
+                'id': 'municipios',
+                'type': 'fill',
+                'source': 'municipios',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'fill-color': [
+                        "step", ['get', 'porc_nbi'],
+                        "#fff",
+                        0, "#fff5f0",
+                        1.2, "#fdbea5",
+                        3.3, "#fc7050",
+                        5.6, "#d42020",
+                        8.4, "#67000d",
+                        15.8, "#67000d",
+                    ],
+                    'fill-opacity': 0.8
+                }
+            });
+            map.on('click', 'municipios', function (e) {
+                var nombre = e.features[0].properties.NOMBRE;
+                var porc_nbi = e.features[0].properties.porc_nbi;
+                var innerPopup = '<div>Nombre: <b>' + nombre + '</b><br>Porcentaje de viviendas: ' + porc_nbi + '</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+            map.on('mouseenter', 'municipios', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'municipios', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            var url_area_afectada = './area_afectada.geojson';
+            map.addSource('area_afectada', {
+                type: 'geojson',
+                data: url_area_afectada
+            });
+            map.addLayer({
+                'id': 'area_afectada',
+                'type': 'fill',
+                'source': 'area_afectada',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    'fill-color': 'royalblue',
+                    'fill-opacity': 0.8
+                }
+            });
+            map.on('mouseenter', 'area_afectada', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'area_afectada', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+            var leyenda_area_afectada = [['Área afectada','royalblue']];
+            $.each(leyenda_area_afectada, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_area_afectada').append(registro);
+            })
+
+//
+            var url_red_electrica_sanpedrosula = './red_electrica_sanpedrosula.geojson';
+            map.addSource('red_electrica_sanpedrosula', {
+                type: 'geojson',
+                data: url_red_electrica_sanpedrosula
+            });
+
+            map.addLayer({
+                'id': 'red_electrica_sanpedrosula',
+                'type': 'line',
+                'source': 'red_electrica_sanpedrosula',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'line-color': 'orange',
+                    'line-width': 1,
+                }
+            });
+            map.on('mouseenter', 'red_electrica_sanpedrosula', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'red_electrica_sanpedrosula', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            
+            var url_trayectoria_eta = './trayectoria_eta.geojson';
+            map.addSource('trayectoria_eta', {
+                type: 'geojson',
+                data: url_trayectoria_eta
+            });
+
+            map.addLayer({
+                'id': 'trayectoria_eta',
+                'type': 'line',
+                'source': 'trayectoria_eta',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'line-color': 'black',
+                    'line-width': 3,
+                }
+            });
+
+            map.on('mouseenter', 'trayectoria_eta', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'red_electrica_sanpedrosula', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+
+            var url_trayectoria_iota = './trayectoria_iota.geojson';
+            map.addSource('trayectoria_iota', {
+                type: 'geojson',
+                data: url_trayectoria_iota
+            });
+            map.addLayer({
+                'id': 'trayectoria_iota',
+                'type': 'line',
+                'source': 'trayectoria_iota',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'line-color': 'black',
+                    'line-width': 3,
+                }
+            });
+
+            map.on('mouseenter', 'trayectoria_iota', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'trayectoria_iota', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+ //           
+
+            var url_velocidad_viento_iota = './velocidad_viento_iota.geojson';
+            map.addSource('velocidad_viento_iota', {
+                type: 'geojson',
+                data: url_velocidad_viento_iota
+            });
+
+            var leyenda_velocidad_viento_iota = [["~ 60 km/hr",
+                "#f1d64b"],
+            ["~ 90 km/hr",
+                "#34e19f"],
+            ["~ 120 km/hr",
+                "#721f81"],
+            ];
+
+            $.each(leyenda_velocidad_viento_iota, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_velocidad_viento_iota').append(registro);
+            })
+
+            map.addLayer({
+                'id': 'velocidad_viento_iota',
+                'type': 'fill',
+                'source': 'velocidad_viento_iota',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'fill-color': [
+                        "step", ['get', 'RADII'],
+                        "#fff",
+                        34, "#f1d64b",
+                        50, "#34e19f",
+                        64, "#721f81",
+                    ],
+                    'fill-opacity': 0.8,
+                }
+            });
+
+            map.on('mouseenter', 'velocidad_viento_iota', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'velocidad_viento_iota', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+//            
+
+            var url_velocidad_viento_eta = './velocidad_viento_eta.geojson';
+            map.addSource('velocidad_viento_eta', {
+                type: 'geojson',
+                data: url_velocidad_viento_eta
+            });
+
+            var leyenda_velocidad_viento_eta = [["~ 60 km/hr",
+                "#f1d64b"],
+            ["~ 90 km/hr",
+                "#34e19f"],
+            ["~ 120 km/hr",
+                "#721f81"],
+            ];
+
+            $.each(leyenda_velocidad_viento_eta, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_velocidad_viento_eta').append(registro);
+            })
+
+            map.addLayer({
+                'id': 'velocidad_viento_eta',
+                'type': 'fill',
+                'source': 'velocidad_viento_eta',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'fill-color': [
+                        "step", ['get', 'RADII'],
+                        "#fff",
+                        34, "#f1d64b",
+                        50, "#34e19f",
+                        64, "#721f81",
+                    ],
+                    'fill-opacity': 0.8,
+                }
+            });
+
+            map.on('mouseenter', 'velocidad_viento_eta', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'velocidad_viento_eta', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+//
+            var url_estado_tormenta_iota = './estado_tormenta_iota.geojson';
+            map.addSource('estado_tormenta_iota', {
+                type: 'geojson',
+                data: url_estado_tormenta_iota
+            });
+
+            var leyenda_estado_tormenta_iota = [["Ciclón Extratropical",
+                "#fc8761"],
+            ["Depresión Tropical",
+                "#b63679"],
+            ["Tormenta Tropical",
+                "#50127b"],
+            ["Huracán",
+                "#000004"],
+            ];
+
+            $.each(leyenda_estado_tormenta_iota, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_estado_tormenta_iota').append(registro);
+            })
+
+            map.addLayer({
+                'id': 'estado_tormenta_iota',
+                'type': 'circle',
+                'source': 'estado_tormenta_iota',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-color': [
+                        "match",
+                        ["get", "STORMTYPE"],
+                        "EX",
+                        "#fc8761",
+                        "TD",
+                        "#b63679",
+                        "TS",
+                        "#50127b",
+                        "HU",
+                        "#000004",
+                        "LO",
+                        "#fcfdbf",
+                        "#2242cf"
+                    ]
+                }
+            });
+
+            map.on('mouseenter', 'estado_tormenta_iota', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'estado_tormenta_iota', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            var url_estado_tormenta_eta = './estado_tormenta_eta.geojson';
+            map.addSource('estado_tormenta_eta', {
+                type: 'geojson',
+                data: url_estado_tormenta_eta
+            });
+
+            var leyenda_estado_tormenta_eta = [["Ciclón Extratropical",
+                "#fc8761"],
+            ["Depresión Tropical",
+                "#b63679"],
+            ["Tormenta Tropical",
+                "#50127b"],
+            ["Huracán",
+                "#000004"],
+            ];
+
+            $.each(leyenda_estado_tormenta_eta, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_estado_tormenta_eta').append(registro);
+            })
+
+            map.addLayer({
+                'id': 'estado_tormenta_eta',
+                'type': 'circle',
+                'source': 'estado_tormenta_eta',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-color': [
+                        "match",
+                        ["get", "STORMTYPE"],
+                        "EX",
+                        "#fc8761",
+                        "TD",
+                        "#b63679",
+                        "TS",
+                        "#50127b",
+                        "HU",
+                        "#000004",
+                        "#2242cf"
+                    ]
+                }
+            });
+
+            map.on('mouseenter', 'estado_tormenta_eta', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'estado_tormenta_eta', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            var url_albergue = './albergues.geojson';
+            map.addSource('albergues', {
+                type: 'geojson',
+                data: url_albergue
+            });
+
+            map.on('click', 'albergues', function (e) {
+                var nombre = e.features[0].properties.ALBERGUE;
+                var telefono = e.features[0].properties.TELEFONO;
+                var comunidad = e.features[0].properties.COMUNIDAD;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre:</b>' + nombre + '<br><b>Teléfono:</b> ' + telefono + '<br><b>Comunidad:</b> ' + comunidad +'</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.addLayer({
+                'id': 'albergues',
+                'type': 'circle',
+                'source': 'albergues',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 4,
+                    'circle-color': '#B42222'
+                }
+            });
+
+            var leyenda_albergues = [['Albergues','#b42222']];
+            $.each(leyenda_albergues, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_albergues').append(registro);
+            })
+
+            map.on('mouseenter', 'albergues', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'albergues', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+//
+
+            var url_unidades_salud = './unidades_salud.geojson';
+            map.addSource('unidades_salud', {
+                type: 'geojson',
+                data: url_unidades_salud
+            });
+
+            map.on('click', 'unidades_salud', function (e) {
+                var nombre = e.features[0].properties.name;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre:</b>' + nombre + '</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.addLayer({
+                'id': 'unidades_salud',
+                'type': 'circle',
+                'source': 'unidades_salud',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 4,
+                    'circle-color': 'green'
+                }
+            });
+
+            var leyenda_unidades_salud = [['Unidades de Salud','#1b8000']];
+            $.each(leyenda_unidades_salud, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_unidades_salud').append(registro);
+            })
+
+            map.on('mouseenter', 'unidades_salud', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'unidades_salud', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            var url_eta_iota_afectaciones_infraestructura = './eta_iota_afectaciones_infraestructura.geojson';
+            map.addSource('eta_iota_afectaciones_infraestructura', {
+                type: 'geojson',
+                data: url_eta_iota_afectaciones_infraestructura
+            });
+
+            map.on('click', 'eta_iota_afectaciones_infraestructura', function (e) {
+                var descripcion = e.features[0].properties.DESSCRIP;
+                var evento = e.features[0].properties.EVENTO;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Evento: </b>' + descripcion + '<br><b>Huracán: </b> ' + evento + '</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.addLayer({
+                'id': 'eta_iota_afectaciones_infraestructura',
+                'type': 'circle',
+                'source': 'eta_iota_afectaciones_infraestructura',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 6,
+                    'circle-color': 'darkslateblue'
+                }
+            });
+
+            var leyenda_eta_iota_afectaciones_infraestructura = [['Afectaciones en Infraestructura','#483d8b']];
+            $.each(leyenda_eta_iota_afectaciones_infraestructura, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_eta_iota_afectaciones_infraestructura').append(registro);
+            })
+
+            map.on('mouseenter', 'eta_iota_afectaciones_infraestructura', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'eta_iota_afectaciones_infraestructura', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+//
+
+            var url_afectaciones_vial_investh = './afectaciones_vial_investh.geojson';
+            map.addSource('afectaciones_vial_investh', {
+                type: 'geojson',
+                data: url_afectaciones_vial_investh
+            });
+
+            map.on('click', 'afectaciones_vial_investh', function (e) {
+                var evento = e.features[0].properties.name;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Evento: </b> ' + evento + '</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.addLayer({
+                'id': 'afectaciones_vial_investh',
+                'type': 'circle',
+                'source': 'afectaciones_vial_investh',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 6,
+                    'circle-color': 'darkslateblue'
+                }
+            });
+
+            var leyenda_afectaciones_vial_investh = [['Afectaciones en Infraestructura Vial','#483d8b']];
+            $.each(leyenda_afectaciones_vial_investh, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_afectaciones_vial_investh').append(registro);
+            })
+
+            map.on('mouseenter', 'afectaciones_vial_investh', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'afectaciones_vial_investh', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+//
+
+            var url_establecimientos_educativos = './establecimientos_educativos.geojson';
+            map.addSource('establecimientos_educativos', {
+                type: 'geojson',
+                data: url_establecimientos_educativos
+            });
+
+            map.addLayer({
+                'id': 'establecimientos_educativos',
+                'type': 'circle',
+                'source': 'establecimientos_educativos',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 4,
+                    'circle-color': 'orange'
+                }
+            });
+
+            map.on('click', 'establecimientos_educativos', function (e) {
+                var nombre = e.features[0].properties.Nombre_del;
+                var direccion = e.features[0].properties.Dirección;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre: </b>' + nombre + '<br><b>Dirección: </b> ' + direccion + '</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            var leyenda_establecimientos_educativos = [['Establecimientos Educativos','#fba502']];
+            $.each(leyenda_establecimientos_educativos, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_establecimientos_educativos').append(registro);
+            })
+
+            map.on('mouseenter', 'establecimientos_educativos', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'establecimientos_educativos', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+ //           
+
+            var url_establecimientos_educativos_afectados = './escuelas_afectadas.geojson';
+            map.addSource('establecimientos_educativos_afectados', {
+                type: 'geojson',
+                data: url_establecimientos_educativos_afectados
+            });
+
+            map.addLayer({
+                'id': 'establecimientos_educativos_afectados',
+                'type': 'circle',
+                'source': 'establecimientos_educativos_afectados',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 6,
+                    'circle-color': 'red'
+                }
+            });
+
+            var leyenda_establecimientos_educativos_afectados = [["Establecimientos Educativos Afectados",
+                "red"]];
+
+            $.each(leyenda_establecimientos_educativos_afectados, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_establecimientos_educativos_afectados').append(registro);
+            })
+
+            map.on('click', 'establecimientos_educativos_afectados', function (e) {
+                var nombre = e.features[0].properties.nombre;
+                var telefono = e.features[0].properties.movil;
+                var evento = e.features[0].properties.descripcion;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre: </b>' + nombre + '<br><b>Teléfono: </b> ' + telefono + '<br><b>Impacto: </b> ' + evento + '</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.on('mouseenter', 'establecimientos_educativos_afectados', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'establecimientos_educativos_afectados', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            var url_albergues_afectados = './albergues_afectados.geojson';
+            map.addSource('albergues_afectados', {
+                type: 'geojson',
+                data: url_albergues_afectados
+            });
+
+            map.on('click', 'albergues_afectados', function (e) {
+                var nombre = e.features[0].properties.ce_albergue;
+                var capacidad = e.features[0].properties.capacidad;
+                var telefono = e.features[0].properties.telefono;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre:</b>' + nombre + '<br><b>Capacidad:</b> ' + capacidad + '<br><b>Teléfono:</b> ' + telefono +'</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.addLayer({
+                'id': 'albergues_afectados',
+                'type': 'circle',
+                'source': 'albergues_afectados',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 6,
+                    'circle-color': 'green'
+                }
+            });
+
+            map.on('click', 'albergues_afectados', function (e) {
+                var nombre = e.features[0].properties.ce_albergue;
+                var capacidad = e.features[0].properties.capacidad;
+                var telefono = e.features[0].properties.telefono;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre:</b>' + nombre + '<br><b>Capacidad:</b> ' + capacidad + '<br><b>Teléfono:</b> ' + telefono +'</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            var leyenda_albergues_afectados = [['Albergues Afectados','#1b8000']];
+            $.each(leyenda_albergues_afectados, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_albergues_afectados').append(registro);
+            })
+
+            map.on('mouseenter', 'albergues_afectados', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'albergues_afectados', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+//
+
+            var url_sistemas_agua = './sistemas_agua.geojson';
+            map.addSource('sistemas_agua', {
+                type: 'geojson',
+                data: url_sistemas_agua
+            });
+            map.addLayer({
+                'id': 'sistemas_agua',
+                'type': 'circle',
+                'source': 'sistemas_agua',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 4,
+                    'circle-color': 'royalblue'
+                }
+            });
+
+            map.on('click', 'sistemas_agua', function (e) {
+                var nombre = e.features[0].properties.nombre;
+                var viviendas = e.features[0].properties.viv_servidas;
+                var tratamiento = e.features[0].properties.trat_tipos;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre:</b>' + nombre + '<br><b>Viviendas Servidas: </b> ' + viviendas + '<br><b>Tipo de Tratamiento:</b> ' + tratamiento +'</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            var leyenda_sistemas_agua = [['Sistemas de agua','royalblue']];
+            $.each(leyenda_sistemas_agua, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_sistemas_agua').append(registro);
+            })
+
+            map.on('mouseenter', 'sistemas_agua', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'sistemas_agua', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+    //
+
+            var url_sistemas_residuos = './sistemas_residuos.geojson';
+            map.addSource('sistemas_residuos', {
+                type: 'geojson',
+                data: url_sistemas_residuos
+            });
+
+            map.on('click', 'sistemas_residuos', function (e) {
+                var nombre = e.features[0].properties.nombre;
+                var viviendas = e.features[0].properties.viviendas;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre:</b>' + nombre + '<br><b>Viviendas Servidas: </b> ' + viviendas +'</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.addLayer({
+                'id': 'sistemas_residuos',
+                'type': 'circle',
+                'source': 'sistemas_residuos',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'circle-radius': 4,
+                    'circle-color': 'peru'
+                }
+            });
+
+            var leyenda_sistemas_residuos = [['Sistema de Residuos','peru']];
+            $.each(leyenda_sistemas_residuos, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_sistemas_residuos').append(registro);
+            })
+
+            map.on('mouseenter', 'sistemas_residuos', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'sistemas_residuos', function () {
+                map.getCanvas().style.cursor = '';
+            });
+    
+//
+
+            var url_cobertura_inundada_agricultura = './cobertura_inundada_agricultura.geojson';
+            map.addSource('cobertura_inundada_agricultura', {
+                type: 'geojson',
+                data: url_cobertura_inundada_agricultura
+            });
+
+            var leyenda_cobertura_inundada_agricultura = [["Agricultura Tecnificada",
+                "#2242cf"],
+            ["Caña de Azucar",
+                "#73d22f"],
+            ["Frutales",
+                "#5edce5"],
+            ["Musácea",
+                "#e3c438"],
+            ["Palma Africana",
+                "#d52a1e"],
+            ["Pastos/Cultivos",
+                "#8525cd"],
+            ["Piña",
+                "#58d881"]];
+
+            $.each(leyenda_cobertura_inundada_agricultura, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_cobertura_inundada_agricultura').append(registro);
+            })
+
+            map.addLayer({
+                'id': 'cobertura_inundada_agricultura',
+                'type': 'fill',
+                'source': 'cobertura_inundada_agricultura',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'fill-color': [
+                        "match",
+                        ["get", "Class_Name"],
+                        "Agricultura Tecnificada",
+                        "#2242cf",
+                        "Caña de Azucar",
+                        "#73d22f",
+                        "Frutales",
+                        "#5edce5",
+                        "Musácea",
+                        "#e3c438",
+                        "Palma Africana",
+                        "#d52a1e",
+                        "Pastos/Cultivos",
+                        "#8525cd",
+                        "Piña",
+                        "#58d881",
+                        "#2242cf"
+                    ]
+                }
+            });
+
+            map.on('click', 'cobertura_inundada_agricultura', function (e) {
+                var cultivo = e.features[0].properties.Class_Name;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Tipo de Cultivo:</b>' + cultivo +'</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.on('mouseenter', 'cobertura_inundada_agricultura', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'cobertura_inundada_agricultura', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            var url_cobertura_inundada_medioambiente = './cobertura_inundada_medioambiente.geojson';
+            map.addSource('cobertura_inundada_medioambiente', {
+                type: 'geojson',
+                data: url_cobertura_inundada_medioambiente
+            });
+
+            var leyenda_cobertura_inundada_medioambiente = [["Arboles Dispersos",
+                "#d62997"],
+            ["Arenal de Playa",
+                "#e2ce82"],
+            ["Bosque de Conífera Denso",
+                "#1bd17f"],
+            ["Bosque de Conífera Ralo",
+                "#db496b"],
+            ["Bosque de Mangle Alto",
+                "#55dbd5"],
+            ["Bosque Latifoliado Deciduo",
+                "#dcd65b"],
+            ["Bosque Latifoliado Húmedo",
+                "#148ac9"],
+            ["Bosque Latifoliado Húmedo Inundado",
+                "#1432ba"],
+            ["Bosque Mixto",
+                "#a2e02d"],
+            ["Sabanas",
+                "#cb540f"],
+            ["Suelo Desnudo Continental",
+                "#d96752"],
+            ["Tique (Acoelorraphe wright)",
+                "#4f34e7"],
+            ["Vegetación Secundaria Decidua",
+                "#a3ce59"],
+            ["Vegetación Secundaria Húmeda",
+                "#62eb76"]];
+
+            $.each(leyenda_cobertura_inundada_medioambiente, function (i, record) {
+                var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+                $('#leyenda_cobertura_inundada_medioambiente').append(registro);
+            })
+
+            map.addLayer({
+                'id': 'cobertura_inundada_medioambiente',
+                'type': 'fill',
+                'source': 'cobertura_inundada_medioambiente',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'paint': {
+                    'fill-color': [
+                        "match",
+                        ["get", "Class_Name"],
+                        "Arboles Dispersos",
+                        "#d62997",
+                        "Arenal de Playa",
+                        "#e2ce82",
+                        "Bosque de Conífera Denso",
+                        "#1bd17f",
+                        "Bosque de Conífera Ralo",
+                        "#db496b",
+                        "Bosque de Mangle Alto",
+                        "#55dbd5",
+                        "Bosque Latifoliado Deciduo",
+                        "#dcd65b",
+                        "Bosque Latifoliado Húmedo",
+                        "#148ac9",
+                        "Bosque Latifoliado Húmedo Inund",
+                        "#1432ba",
+                        "Bosque Mixto",
+                        "#a2e02d",
+                        "Sabanas",
+                        "#cb540f",
+                        "Suelo Desnudo Continental",
+                        "#d96752",
+                        "Tique (Acoelorraphe wright)",
+                        "#4f34e7",
+                        "Vegetación Secundaria Decidua",
+                        "#a3ce59",
+                        "Vegetación Secundaria Húmeda",
+                        "#62eb76",
+                        "#2242cf"
+                    ]
+                }
+            });
+
+            map.on('click', 'cobertura_inundada_medioambiente', function (e) {
+                var cultivo = e.features[0].properties.Class_Name;
+                var area = e.features[0].properties.Area_m2;
+                var sensor = e.features[0].properties.Sensor_ID;
+                var innerPopup = '<div>'+ '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Tipo de Cultivo:</b>' + cultivo + '<br><b>Área (m2): </b> ' + area +'<br><b>Sensor Utilizado: </b> ' + sensor +'</div>';
+                new mapboxgl.Popup()
+                    .setLngLat(e.lngLat)
+                    .setHTML(innerPopup)
+                    .addTo(map);
+            });
+
+            map.on('mouseenter', 'cobertura_inundada_medioambiente', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'cobertura_inundada_medioambiente', function () {
+                map.getCanvas().style.cursor = '';
+            });
+//
+            $("#icono_info").click (function(){
+            $("#info").show();
+        });
+
+        $("#icono_cerrar").click (function(){
+            $("#info").hide();
+        });
+
+
+
+            /*  var url_cobertura_inundada_infraestructura = './cobertura_inundada_infraestructura.geojson';
+        map.addSource('cobertura_inundada_infraestructura', {
+            type: 'geojson',
+            data: url_cobertura_inundada_infraestructura
+        });
+
+        var leyenda_cobertura_inundada_infraestructura = [["Zona Urbana Continua",
+            "#4d5957"],
+        ["Zona Urbana Discontiua",
+            "#f8d848"],
+        ["Zonas Industriales y Comerciales",
+            "#eb9554"],
+                ];
+
+        $.each(leyenda_cobertura_inundada_infraestructura, function (i, record) {
+            var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+            $('#leyenda_cobertura_inundada_infraestructura').append(registro);
+        })
+
+        map.addLayer({
+            'id': 'cobertura_inundada_infraestructura',
+            'type': 'fill',
+            'source': 'cobertura_inundada_infraestructura',
+            'layout': {
+                'visibility': 'none'
+            },
+            'paint': {
+                'fill-color': [
+                    "match",
+                    ["get", "Class_Name"],
+                    "Zona Urbana Continua",
+                    "#4d5957",
+                    "Zona Urbana Discontiua",
+                    "#f8d848",
+                    "Zonas Industriales y Comerciales",
+                    "#eb9554",
+                    "#2242cf"
+                ]
+            }
+        }); */
+
+
+        });
+        encendido = function encendido(x) {
+
+            $(".mapboxgl-popup-content").hide();
+
+            //y = document.getElementById('icono_' + x);
+
+            //$(y).toggle();
+
+            var visibility = map.getLayoutProperty(x, 'visibility');
+
+            // toggle layer visibility by changing the layout object's visibility property
+            if (visibility === 'visible') {
+                map.setLayoutProperty(x, 'visibility', 'none');
+                this.className = '';
+                $('#leyenda_' + x).hide();
+            } else {
+                this.className = 'active';
+                map.setLayoutProperty(x, 'visibility', 'visible');
+                $('#leyenda_' + x).show();
+            }
+        };
+    });
+</script>
+
+</html>
