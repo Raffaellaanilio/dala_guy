@@ -24,7 +24,7 @@ var listado_temas = [
 ]
 
 var mensajes_claves = [
-[1, 'mensaje clave escuelas'],
+[1, ''],
 [2, ''],
 [3, ''],
 [4, ''],
