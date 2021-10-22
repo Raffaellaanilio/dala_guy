@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: steelblue;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#header {
+    background-color: white;
+    position: absolute;
+    top: 0px;
+    height: 7vh;
+    width: 100vw;
+    align-items: center;
+}
+
+.header_div {
+    margin-left: 1rem;
+}
+
+#logo_eclac {
+    height: inherit;
+    margin-left: 0.5rem;
+}
+
+#toc {
+    background-color: white;
+    position: absolute;
+    top: 7vh;
+    bottom: 0;
+    width: 30vw;
+    overflow-y: scroll;
+}
+
+.header-category {
+    margin: 3px 0px;
+    height: 2.5rem;
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.header-category:hover {
+    background-color: gainsboro;
+}
+
+.body-category {
+    margin: 3px 0px;
+    background-color: #f2f2f2;
+}
+
+.layer_body {
+    margin: 0px;
+    width: 100%;
+    font-size: small;
+    padding: 0rem 1rem;
+    min-height: 2rem;
+    background-color: white;
+    border-bottom-color: gainsboro;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+}
+
+.layer_header {
+    margin: 0px;
+}
+
+.layer_legend {
+    margin: 0px;
+    padding: 1rem;
+}
