@@ -2,26 +2,38 @@
 <html lang="en">
 
 <head>
-    <title>DaLa Guyana</title>
+    <title>DALA ECLAC</title>
+    <meta charset="utf-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/91822fdb88.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;700;900&display=swap" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
-    <link href="./dala_guy.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-   
+    <div id="map"></div>
+    <div id="header" class="row" style="margin: auto;">
+        <div class="header_div" id="logo_eclac" style="height: inherit;">
+            <img id="logo_eclac" style="padding: 3px;" src="./images/logo_eclac.svg">
+        </div>
+        <div class="header_div">
+            <h5 id="title"></h5>
+        </div>
+        <div class="header_div">
+            <h6 id="subtitle"></h6>
+        </div>
+    </div>
+    <div id="toc">
+    </div>
 </body>
-
+<script src="./config/config.js"></script>
+<script src="./scripts.js"></script>
 
 </html>
-
