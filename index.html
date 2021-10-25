@@ -14,23 +14,31 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/91822fdb88.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
     <div id="map"></div>
-    <div id="header" class="row" style="margin: auto;">
-        <div class="header_div" id="logo_eclac" style="height: inherit;">
-            <img id="logo_eclac" style="padding: 3px;" src="./images/logo_eclac.svg">
+    <div id="header" class="row">
+        <div class="header_div card">
+            <h5 id="country"></h5>
         </div>
-        <div class="header_div">
-            <h5 id="title"></h5>
-        </div>
-        <div class="header_div">
-            <h6 id="subtitle"></h6>
+        <div class="header_div card">
+            <h5 id="event"></h5>
         </div>
     </div>
+
     <div id="toc">
+    <div id="nav-top">
+        <div class="header_div" id="logo_eclac">
+            <img id="logo_guy" style="padding: 3px" src="./images/logo_eclac.svg">
+        </div>
+        <div id="title" class="header_div">
+        </div>
+    </div>
     </div>
 </body>
 <script src="./config/config.js"></script>

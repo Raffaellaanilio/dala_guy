@@ -30,8 +30,10 @@ var map_style = main_items.map.style;
 var map_center = main_items.map.center;
 var map_zoom = main_items.map.zoom;
 var lang = main_items.main_language;
+var country = main_items.country[language];
+var event = main_items.event[language];
 var title = main_items.title[language];
-var subtitle = main_items.subtitle[language];
+
 
 var map = new mapboxgl.Map({
     container: 'map', // container id
@@ -87,14 +89,15 @@ map.on('load', function() {
 
 load_page = function load_page() {
     $("#title").html(title);
-    $("#subtitle").html(subtitle);
+    $("#country").html(country);
+    $("#event").html(event);
     $.each(categories, function(i) {
         $("#toc").append('<div class="row header-category" data-toggle="collapse" data-target="#body_category_' + categories[i][0] + '">' +
-            '<div class="col-10">' + categories[i][1 + language] + '</div><div class="col-1" id="layer_counter_category_' + categories[i][0] + '">0</div></div>' +
+            '<div class="col-10">' + categories[i][1 + language] + '</div><div style="align-items:center" class="col-2" id="layer_counter_category_' + categories[i][0] + '">0</div></div>' +
             '<div class="row collapse body-category" id ="body_category_' + categories[i][0] + '" data-parent="#toc"></div>');
     });
     $.each(layers, function(i) {
-        $('#body_category_' + layers[i][1]).append('<div class="row layer_body" id="layer_body_' + layers[i][0] + '"><div class="row w-100 layer_header"><div class="col-1"><input type="checkbox" class="form-check-input" value="" onclick="layer_switcher(\'' + layers[i][0] + '\',\'' + layers[i][2] + '\')"></div><div class="10">' + layers[i][3 + language] + '</div></div>');
+        $('#body_category_' + layers[i][1]).append('<div class="row layer_body" id="layer_body_' + layers[i][0] + '"><div class="row w-100 layer_header"><div class="col-1"><input type="checkbox" class="form-check-input" style="lign-items: center;" value="" onclick="layer_switcher(\'' + layers[i][0] + '\',\'' + layers[i][2] + '\')"></div><div class="10">' + layers[i][3 + language] + '</div></div>');
         var number = $('#layer_counter_category_' + layers[i][1]).html();
         $('#layer_counter_category_' + layers[i][1]).html(Number(number) + 1);
     });

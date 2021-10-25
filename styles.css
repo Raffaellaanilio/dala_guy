@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    color: steelblue;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #map {
@@ -11,13 +11,24 @@ body {
     width: 100%;
 }
 
+#nav-top{
+    background-color: #383E54;
+    color: white;
+    align-content: center;
+    height:100px;
+}
+
 #header {
-    background-color: white;
+    background-color: #FAFAFA;
     position: absolute;
     top: 0px;
     height: 7vh;
-    width: 100vw;
+    width: 100%;
     align-items: center;
+    align-content: center;
+    margin-left: 25%;
+    display:flex;
+    color: #383E54;
 }
 
 .header_div {
@@ -27,31 +38,59 @@ body {
 #logo_eclac {
     height: inherit;
     margin-left: 0.5rem;
+    float: left;
+}
+
+#logo_guy {
+    height: inherit;
+    margin-left: 0.5rem;
+}
+
+#title {
+    line-height: 35px;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    top: 5%;
+    width: 60%;
+    margin: auto;
+}
+
+#country {
+    padding: 5px;
+    align-items: center;
+}
+
+#event {
+    padding: 5px;
+    align-items: center;
 }
 
 #toc {
-    background-color: white;
+    background-color: #383E54;
     position: absolute;
-    top: 7vh;
+    top: 0vh;
     bottom: 0;
-    width: 30vw;
-    overflow-y: scroll;
+    width: 25vw;
+    overflow: auto
 }
 
 .header-category {
-    margin: 3px 0px;
-    height: 2.5rem;
-    background-color: #f2f2f2;
+    margin: 0px 0px;
+    height: 3rem;
+    background-color: #383E54;
     cursor: pointer;
+    align-items: center;
+    color: #FAFAFA;
 }
 
 .header-category:hover {
-    background-color: gainsboro;
+    background-color: #292B3A;
 }
 
 .body-category {
     margin: 3px 0px;
-    background-color: #f2f2f2;
+    background-color: #383E54;
 }
 
 .layer_body {
@@ -64,6 +103,7 @@ body {
     border-bottom-color: gainsboro;
     border-bottom-style: solid;
     border-bottom-width: 0.5px;
+    align-items: center;
 }
 
 .layer_header {
@@ -73,4 +113,11 @@ body {
 .layer_legend {
     margin: 0px;
     padding: 1rem;
+}
+
+input.form-check-input {
+    align-items: center;
+    width : 1.3rem;
+    height : 1.3rem;
+    border-color:#292B3A;
 }
