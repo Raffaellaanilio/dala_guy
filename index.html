@@ -24,22 +24,31 @@
     <div id="map"></div>
     <div id="header" class="row">
         <div class="header_div card">
-            <h5 id="country"></h5>
+            <div id="country">
+            </div>
         </div>
         <div class="header_div card">
-            <h5 id="event"></h5>
+            <div id="event" onclick="info_evento()"></div>
+        </div>
+        <div class="header_div card">
+            <div id="report">
+            </div>
         </div>
     </div>
 
     <div id="toc">
     <div id="nav-top">
         <div class="header_div" id="logo_eclac">
-            <img id="logo_guy" style="padding: 3px" src="./images/logo_eclac.svg">
+            <img id="logo_eclac" style="padding: 3px" src="./images/logo_eclac.svg">
         </div>
         <div id="title" class="header_div">
         </div>
     </div>
     </div>
+
+    <div class="card" id="description">
+    </div>
+
 </body>
 <script src="./config/config.js"></script>
 <script src="./scripts.js"></script>

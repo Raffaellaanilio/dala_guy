@@ -1,7 +1,9 @@
 var main_items = {
     "title": ["Evaluación de Daños y Pérdidas <br> (DaLA)", "Damage and Loss Assessment <br> (DaLA)"],
-    "country": ["País: Guyana", "Country: Guyana"],
+    "country": ["País: Guyana <img src='./images/guy_flag.svg'>", "Country: Guyana <img src='./images/guy_flag.svg'>"],
     "event": ["Evento: Afectación por inundaciones adversas, Junio de 2021", "Event: Impacted by adverse flooding, June 2021"],
+    "report": ["Ir al reporte <i class='fas fa-file-pdf'></i>", "Go to report <i class='fas fa-file-pdf'></i>"],
+    "description": ["Descripción del evento", "Description of the event"],
     "logo_partner": ["gfdrr_logo.png"],
     "main_language": "english",
     "map": {
@@ -10,6 +12,13 @@ var main_items = {
         "style": "mapbox://styles/mapbox/light-v10"
     }
 }
+
+/* var indicadores = [
+    [1, '', '']
+    [2, '', '']
+    [3, '', '']
+    [4, '', '']
+] */
 
 
 var categories = [
@@ -68,7 +77,7 @@ var layers = [
     [9, 12, 'geonode:GUY_LAND_USE_COASTAL_PLAIN_2010', 'Uso de suelo costero', 'Coastal land use', 'Comisión Forestal de Guyana, 2010', 'Guyana Forestry Commission, 2010', 'Esta capa muestra los límites de las unidades de uso / tenencia de la tierra a lo largo de la llanura costera en la parte noreste de Guyana. El conjunto de datos se actualizó utilizando imágenes de satélite de resolución media (LANDSAT TM de 2010/2011), durante el proyecto de desarrollo del plan de uso de la tierra, sin embargo, no se realizó ningún trabajo de campo en este momento.', 'This layer shows boundaries of Land Use / tenure units  along the Coastal Plain the the north-eastern part of Guyana. The dataset was updated using a medium resolution satellite imagery (LANDSAT TM from 2010/2011), during the Development of the Land Use plan project however no field work was conducted at this time.'],
     [10, 12, 'geonode:GUY_LAND_COVER_USE_2010', 'Uso de cobertura de suelo', 'Land cover use', 'Comisión Forestal de Guyana, 2010', 'Guyana Forestry Commission, 2010', 'Esta capa resume la cobertura y el uso del suelo en Guyana según los mapas de vegetación elaborados por GFC (2010) y Huber et al (1995), que se actualizaron utilizando un mosaico de imágenes satelitales LANDSAT TM de 2010/2011.', 'This layer summarizes the Land Cover / Land Use in Guyana  based on the vegetation maps made by GFC (2010) and Huber et al (1995), which were updated using a mosaic of LANDSAT TM satellite imagery from 2010/2011'],
     [11, 2, 'geonode:GUY_HOUSES_OSM', 'Viviendas', 'Housing', 'Open Street Map', 'Equipo de evaluación con datos de OpenStreetMap', 'Assessment team with OpenStreetMap data', 'Esta capa muestra las unidades habitacionales utilizadas como referencia para estimar los daños en el sector habitacional.', 'This layer shows the housing units used as a reference for estimating the damages in the housing sector'],
-    [12, 1, 'geonode:GUY_FLOODED_AREA_JUN_MAY_2021', 'Área inundada junio-mayo 2021', ,'Flooded area jun-may 2021', 'UNITAR-UNOSAT, 2021', 'UNITAR-UNOSAT, 2021', 'Extensión de agua en todo el país identificando las áreas que se inundaron en algún momento durante los meses de mayo y junio de 2021', 'Water extent across the country identifying the areas that were flooded at some point during the months of May and June 2021'],
+    [12, 1, 'geonode:GUY_FLOODED_AREA_JUN_MAY_2021', 'Área inundada junio-mayo 2021','Flooded area jun-may 2021', 'UNITAR-UNOSAT, 2021', 'UNITAR-UNOSAT, 2021', 'Extensión de agua en todo el país identificando las áreas que se inundaron en algún momento durante los meses de mayo y junio de 2021', 'Water extent across the country identifying the areas that were flooded at some point during the months of May and June 2021'],
     [13, 9, 'geonode:GUY_AIRPORTS', 'Aeropuertos', 'Airports', 'Comisión de Tierras y Encuestas de Guyana', 'Guyana Lands and Surveys Commission', 'Esta capa muestra los aeropuertos y pistas de aterrizaje en Guyana.', 'This layer shows the airports and airstrips in Guyana'],
     [14, 2, 'geonode:GUY_HEALTH_FACILITIES', 'Centros de salud', 'Health facilities', 'Comisión de Tierras y Encuestas de Guyana','Guyana Lands and Surveys Commission', 'Esta capa muestra los diferentes tipos de establecimientos de salud en Guyana.','This layer shows the different types of health facilities in Guyana'],
     [15, 1, 'geonode:Flood_area_09_06_2021_UpperMazaruni_RCM2_MS', 'Área inundada "Upper Mazaruni" (09/06/2021)', 'Flooded area "Upper Mazaruni" (09/06/2021)', 'UNITAR-UNOSAT, 2021', 'UNITAR-UNOSAT, 2021', 'Este mapa ilustra las aguas superficiales detectadas por satélite a lo largo del río Mazaruni en la región de Cuyuni-Mazaruni de Guyana, según se observa en la imagen del radar RCM-2 obtenida el 9 de junio de 2021 a las 22:17 UTC. Dentro del área analizada de aproximadamente 700 km2, se observó un total de aproximadamente 4 km2 de tierras inundadas. Este es un análisis preliminar que aún no ha sido validado en el campo. Envíe sus comentarios en tierra a UNITAR-UNOSAT', 'This map illustrates satellite-detected surface waters along the Mazaruni river in Cuyuni-Mazaruni Region of Guyana as observed from RCM-2 radar image acquired on 09 June 2021 at 22:17 UTC. Within the analyzed area of about 700 km2, a total of about 4 km2 of lands were observed as flooded. This is a preliminary analysis that has not yet been validated in the field. Please send ground feedback to UNITAR-UNOSAT'],

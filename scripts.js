@@ -33,6 +33,10 @@ var lang = main_items.main_language;
 var country = main_items.country[language];
 var event = main_items.event[language];
 var title = main_items.title[language];
+var description = main_items.description[language];
+var report = main_items.report[language];
+
+//var indicator = getQueryVariableGET('indicator_id');
 
 
 var map = new mapboxgl.Map({
@@ -91,9 +95,11 @@ load_page = function load_page() {
     $("#title").html(title);
     $("#country").html(country);
     $("#event").html(event);
+    $("#description").html(description);
+    $("#report").html(report);
     $.each(categories, function(i) {
         $("#toc").append('<div class="row header-category" data-toggle="collapse" data-target="#body_category_' + categories[i][0] + '">' +
-            '<div class="col-10">' + categories[i][1 + language] + '</div><div style="align-items:center" class="col-2" id="layer_counter_category_' + categories[i][0] + '">0</div></div>' +
+            '<div class="col-10">' + categories[i][1 + language] + '</div><div class="col-1 text-center counter" id="layer_counter_category_' + categories[i][0] + '">0</div></div>' +
             '<div class="row collapse body-category" id ="body_category_' + categories[i][0] + '" data-parent="#toc"></div>');
     });
     $.each(layers, function(i) {
@@ -103,3 +109,13 @@ load_page = function load_page() {
     });
 }
 load_page();
+
+
+function info_evento() {
+    var x = document.getElementById("description");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }

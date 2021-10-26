@@ -23,17 +23,38 @@ body {
     position: absolute;
     top: 0px;
     height: 7vh;
-    width: 100%;
+    width: 75%;
     align-items: center;
     align-content: center;
     margin-left: 25%;
     display:flex;
     color: #383E54;
+    font-weight: bold;
 }
+
 
 .header_div {
     margin-left: 1rem;
 }
+
+#country:hover {
+    background-color: #383E54;
+    color: white;
+    border-radius: 4%;
+}
+
+#event:hover {
+    background-color: #383E54;
+    color: white;
+    border-radius: 4%;
+}
+
+#report:hover {
+    background-color: #383E54;
+    color: white;
+    border-radius: 4%;
+}
+
 
 #logo_eclac {
     height: inherit;
@@ -41,9 +62,10 @@ body {
     float: left;
 }
 
-#logo_guy {
+#guy_flag {
     height: inherit;
     margin-left: 0.5rem;
+    float: left;
 }
 
 #title {
@@ -59,11 +81,58 @@ body {
 #country {
     padding: 5px;
     align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
 }
 
-#event {
+
+#report {
     padding: 5px;
     align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+
+#event {
+    padding: 9px;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+#report {
+    padding: 9px;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+#description{
+    display: none;
+    margin-left: 37.4rem;
+    margin-top: 3rem;
+    width: 50rem;
+    padding: 1rem 1rem;
+    min-height: 15rem;
+    background-color: white;
+    border-bottom-color: gainsboro;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+    align-items: center;
+    color: #383E54;
 }
 
 #toc {
@@ -77,11 +146,15 @@ body {
 
 .header-category {
     margin: 0px 0px;
-    height: 3rem;
+    height: 2.8rem;
     background-color: #383E54;
     cursor: pointer;
     align-items: center;
     color: #FAFAFA;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
 }
 
 .header-category:hover {
@@ -108,12 +181,23 @@ body {
 
 .layer_header {
     margin: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
 }
 
 .layer_legend {
     margin: 0px;
     padding: 1rem;
 }
+
+/* .counter { 
+    background-color: whitesmoke;
+    color: #292B3A;
+    font-weight: bold;
+    border-radius: 10%;
+} */
 
 input.form-check-input {
     align-items: center;
