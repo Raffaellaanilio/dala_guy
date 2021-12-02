@@ -9,7 +9,7 @@ var main_items = {
     "map": {
         "center": [-61.156, 5.1], // X and Y
         "zoom": 5.8,
-        "style": "mapbox://styles/mapbox/light-v10"
+        "style": "https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL"
     }
 }
 
@@ -22,6 +22,7 @@ var main_items = {
 
 
 var categories = [
+    [0, 'Evaluación DaLa', 'DaLa evaluation'],
     [1, 'Eventos', 'Events'],
     [2, 'Población afectada', 'Affected population'],
     [3, 'Vivienda', 'Housing'],
@@ -37,7 +38,7 @@ var categories = [
     [13, 'Energía', 'Power'],
     [14, 'Medio ambiente', 'Environment'],
     [15, 'Impacto macroeconómico', 'Macroeconomic impact'],
-    [16, 'Evaluación DaLa', 'DaLa evaluation'],
+    
 ]
 
 var key_messages = [
@@ -85,31 +86,50 @@ var layers = [
     [23, 1, 'geonode:Flood_area_07_06_2021_COP_MS', 'Área inundada (07/06/2021)', 'Flooded area (07/06/2021)', 'Copernicus, Emergency Management Service - Mapping, 2021', 'Copernicus, Emergency Management Service - Mapping, 2021', 'Aguas superficiales detectadas por satélite en la parte oriental de la Región 2 Pomeroon-Supenaam el 6 de junio de 2021', 'Satellite - detected surface waters at the eastern part of Region 2 Pomeroon-Supenaam on 06 June 2021'],
 ]
 
-var sectors = [
+var evaluations = [
     [1, 'd', 'Daños', 'Damages'],
     [2, 'l', 'Pérdidas', 'Losses'],
     [3, 'ac', 'Costos Adicionales', 'Additional Costs'],
     [4, 't', 'Total', 'Total'],
+];
+
+var sectors = [
+    ['housing','Vivienda','Housing'],
+    ['health','Salud','Health'],
+    ['infraest','Infraestructura','Infrastructure'],
+    ['roads','Carreteras','Roads'],
+    ['airport','Aeropuertos','Airports'],
+    ['ports','Puertos','Ports'],
+    ['water_an','Agua','Water'],
+    ['power','Enería','Power'],
+    ['producti','Producción','Production'],
+    ['crops','Cultivos','Crops'],
+    ['livestoc','Algo de la vida','Livestock'],
+    ['forestry','Bosques','Forestry'],
+    ['tourismo','Turismo','Tourism'],
+    ['mining','Minería','Mining'],
+    ['environm','Ambiente','Environment'],
+    ['total','Total','Total'],
 ]
 
 /* d_social
 DAMAGES
-d_housing
-d_health
-d_infraest
-d_roads
-d_airport
-d_ports
-d_water_an
-d_power
-d_producti
-d_crops
-d_livestoc
-d_forestry
-d_tourismo
-d_mining
-d_environm
-d_total
+housing
+health
+infraest
+roads
+airport
+ports
+water_an
+power
+producti
+crops
+livestoc
+forestry
+tourismo
+mining
+environm
+total
 
 LOSSES
 l_emergenc

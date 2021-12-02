@@ -24,7 +24,7 @@ if (lang == "es") {
     }
 }
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiaGNhc3RlbGxhcm8iLCJhIjoiY2lrazJvZHFrMDl1eXYwa202Z2Njczk1eiJ9.fIBpy-XcIN0kKSuIx6oReA';
+//mapboxgl.accessToken = 'pk.eyJ1IjoiaGNhc3RlbGxhcm8iLCJhIjoiY2lrazJvZHFrMDl1eXYwa202Z2Njczk1eiJ9.fIBpy-XcIN0kKSuIx6oReA';
 
 var map_style = main_items.map.style;
 var map_center = main_items.map.center;
@@ -39,7 +39,7 @@ var report = main_items.report[language];
 //var indicator = getQueryVariableGET('indicator_id');
 
 
-var map = new mapboxgl.Map({
+var map = new maplibregl.Map({
     container: 'map', // container id
     style: map_style, // stylesheet location
     center: map_center, // starting position [lng, lat]
@@ -48,7 +48,7 @@ var map = new mapboxgl.Map({
 
 layers_array = [];
 
-map.on('load', function() {
+map.on('load', function () {
     var load_layer = function load_layer(x, y) {
         map.addSource('source_' + x, {
             'type': 'raster',
@@ -77,14 +77,16 @@ map.on('load', function() {
             $('#layer_body_' + x).append('<div class="row w-100 layer_legend" id="legend_' + x + '" style="display:none;"><img src="' + image_url + '"></div>');
             load_layer(x, y);
             layers_array.push(x);
+            $("#checkbox_" + x).prop("checked", true);
         } else {
             var visibility = map.getLayoutProperty('layer_' + x, 'visibility');
             if (visibility == 'visible') {
                 map.setLayoutProperty('layer_' + x, 'visibility', 'none');
+                $("#checkbox_" + x).prop('checked', false);
             } else {
                 map.setLayoutProperty('layer_' + x, 'visibility', 'visible');
+                $("#checkbox_" + x).prop("checked", true);
             }
-
         }
         $('#legend_' + x).toggle();
 
@@ -97,25 +99,73 @@ load_page = function load_page() {
     $("#event").html(event);
     $("#description").html(description);
     $("#report").html(report);
-    $.each(categories, function(i) {
+    $.each(categories, function (i) {
         $("#toc").append('<div class="row header-category" data-toggle="collapse" data-target="#body_category_' + categories[i][0] + '">' +
             '<div class="col-10">' + categories[i][1 + language] + '</div><div class="col-1 text-center counter" id="layer_counter_category_' + categories[i][0] + '">0</div></div>' +
             '<div class="row collapse body-category" id ="body_category_' + categories[i][0] + '" data-parent="#toc"></div>');
     });
-    $.each(layers, function(i) {
-        $('#body_category_' + layers[i][1]).append('<div class="row layer_body" id="layer_body_' + layers[i][0] + '"><div class="row w-100 layer_header"><div class="col-1"><input type="checkbox" class="form-check-input" style="lign-items: center;" value="" onclick="layer_switcher(\'' + layers[i][0] + '\',\'' + layers[i][2] + '\')"></div><div class="10">' + layers[i][3 + language] + '</div></div>');
+    $.each(layers, function (i) {
+        $('#body_category_' + layers[i][1]).append('<div class="row layer_body" id="layer_body_' + layers[i][0] + '"><div class="row w-100 layer_header" onclick="layer_switcher(\'' + layers[i][0] + '\',\'' + layers[i][2] + '\')"><div class="col-1" ><input type="checkbox" class="form-check-input" style="align-items: center;" value="" id="checkbox_' + layers[i][0] + '"></div><div class="col-10">' + layers[i][3 + language] + '</div></div>');
         var number = $('#layer_counter_category_' + layers[i][1]).html();
         $('#layer_counter_category_' + layers[i][1]).html(Number(number) + 1);
     });
 }
 load_page();
 
+select_evaluation = () => {
+    //event.preventDefault();
+    var selected_evaluation = $("#evaluation_selector").children("option:selected").val();
+    alert(selected_evaluation);
+    var evaluation_data = '';
+    var url = 'https://geoportal.cepal.org/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typename=geonode%3ADALA_EVALUATION_GUY&outputFormat=json&srs=EPSG%3A3857&srsName=EPSG%3A3857';
+    // ($.getJSON(url, function (data) {
+    //     evaluation_data = data;
+    // }));
+
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function (data) {
+            console.log(data);
+            map.addSource('source_0', {
+                type: 'geojson',
+                data: data,
+            });
+            var content_layer = {
+                'id': 'layer_0',
+                type: "fill",
+                'source': 'source_0',
+                'layout': {
+                    visibility: 'visible',
+                },
+                paint: {
+                    'fill-color': 'red',
+                    'fill-opacity': 0
+                }
+            };
+            map.addLayer(content_layer);
+        });
+}
+
+load_evaluation = () => {
+    var input = '<div class="layer_body" id="layer_body_0">' +
+        '<div class="row">Evaluación:</div><div class="row"><select id="evaluation_selector" name="evaluation">';
+    $.each(evaluations, function (i, evaluation) {
+        input = input + '<option value="' + evaluation[1] + '">' + evaluation[language + 2] + '</option>'
+    });
+    input = input + '</select></div><div class="row">Sector:</div><div class="row"><select id="sector_selector" name="sector">';
+    $.each(sectors, function (i, sector) {
+        input = input + '<option value="' + sector[0] + '">' + sector[language + 1] + '</option>'
+    });
+    input = input + '</select></div><div class="row"><button onclick="select_evaluation()">Seleccionar</button></div></div>';
+    $('#body_category_0').append(input);
+}
+load_evaluation();
 
 function info_evento() {
     var x = document.getElementById("description");
     if (x.style.display === "block") {
-      x.style.display = "none";
+        x.style.display = "none";
     } else {
-      x.style.display = "block";
+        x.style.display = "block";
     }
-  }
+}
