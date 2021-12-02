@@ -177,6 +177,7 @@ body {
     border-bottom-style: solid;
     border-bottom-width: 0.5px;
     align-items: center;
+    cursor: pointer;
 }
 
 .layer_header {
