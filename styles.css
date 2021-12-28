@@ -120,10 +120,7 @@ body {
     user-select: none; 
 }
 
-#description{
-    display: none;
-    margin-left: 37.4rem;
-    margin-top: 3rem;
+ #description{
     width: 50rem;
     padding: 1rem 1rem;
     min-height: 15rem;
@@ -135,7 +132,58 @@ body {
     color: #383E54;
 }
 
-#toc {
+#countryIndicators{
+    width: 50rem;
+    padding: 1rem 1rem;
+    min-height: 15rem;
+    background-color: white;
+    border-bottom-color: gainsboro;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+    align-items: center;
+    color: #383E54;
+} 
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block;}
+
+#toc{
     background-color: #383E54;
     position: absolute;
     top: 0vh;
@@ -192,13 +240,6 @@ body {
     margin: 0px;
     padding: 1rem;
 }
-
-/* .counter { 
-    background-color: whitesmoke;
-    color: #292B3A;
-    font-weight: bold;
-    border-radius: 10%;
-} */
 
 input.form-check-input {
     align-items: center;
