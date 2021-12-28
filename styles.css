@@ -144,6 +144,56 @@ body {
     overflow: auto
 }
 
+#tab {
+    display:flex;
+    cursor: pointer;    
+}
+
+.tab {
+    background-color: gainsboro;
+    width: 50%;
+    height: 4rem;
+    border-right-width: 2px;
+    border-right-style: solid;
+    padding: 0.2rem;
+    text-align: center;
+    color: #292b3a;
+}
+
+.tab_selected {
+    background-color: #292b3a;
+    width: 50%;
+    height: 4rem;
+    border-right-width: 2px;
+    border-right-style: solid;
+    padding: 0.2rem;
+    text-align: center;
+    color: white;
+}
+
+
+.tab:hover {
+    background-color: #292b3a;
+    color: white;
+    font-weight: bold;
+}
+
+.tab_selected:hover {
+    background-color: #292b3a;
+    color: white;
+    font-weight: bold;
+}
+
+.tab span {
+    font-size: small;
+    font-weight: bold;
+}
+
+.tab_selected span {
+    font-size: small;
+    font-weight: bold;
+}
+
 .header-category {
     margin: 0px 0px;
     height: 2.8rem;

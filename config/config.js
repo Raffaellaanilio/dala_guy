@@ -174,3 +174,40 @@ t_commerce
 t_environm
 t_total
 */
+
+var extent_wms = {
+    "type": "FeatureCollection",
+    "name": "wms_geometry",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features": [{
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [
+                        -176.865368623290237,
+                        81.831531557365281
+                    ],
+                    [
+                        37.78590886932588,
+                        83.197287299630077
+                    ],
+                    [
+                        40.289794396811317,
+                        -81.603905600321212
+                    ],
+                    [
+                        -177.548246494422642,
+                        -82.969661342585994
+                    ],
+                    [
+                        -176.865368623290237,
+                        81.831531557365281
+                    ]
+                ]
+            ]
+        }
+    }]
+};
