@@ -161,11 +161,75 @@ load_evaluation = () => {
 }
 load_evaluation();
 
-function info_evento() {
-    var x = document.getElementById("description");
+/* function infoEvento() {
+    let x = document.getElementById("description");
     if (x.style.display === "block") {
         x.style.display = "none";
     } else {
         x.style.display = "block";
     }
 }
+
+function infoPais() {
+    let x = document.getElementById("countryIndicators");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+    console.log("prueba")
+}
+ */
+
+/* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+function toggleCountryIndicators() {
+    document.querySelector(".myDropdownCountryIndicators").classList.toggle("show");
+  }
+
+  function toggleDescription() {
+    document.querySelector(".myDropdownDescription").classList.toggle("show");
+  }
+
+  
+  // Close the dropdown if the user clicks outside of it // ** NO ESTÁ FUNCIONANDO **
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      let dropdowns = document.querySelector(".dropdown-content");
+      let i;
+      for (i = 0; i < dropdowns.length; i++) {
+        let openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+  //AJAX GET API
+
+     let indicators = [1,2,50,100]
+     let countryISO3 = "GUY"
+     let selectedIndicators = [indicators.forEach(element => console.log(element))]
+     url = `https://api-cepalstat.cepal.org/cepalstat/api/v1/indicator/${selectedIndicators}/metadata?lang=en&format=json`
+
+  for (let index = 0; index < selectedIndicators.length; index++) {
+
+    $.get(url, (response, status) => {
+        if (status === "success"){
+            $("#countryIndicators").append(
+              `<div>
+              ${response.body.metadata.indicator_name} (${response.body.metadata.last_update})<br>
+              ${response.body.data.value}
+              </div>`
+            );  
+          ;
+        }
+      }
+      );
+    
+
+  }
+
+
+
+     
