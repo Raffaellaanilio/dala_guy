@@ -23,12 +23,17 @@
 <body>
     <div id="map"></div>
     <div id="header" class="row">
-        <div class="header_div card">
-            <div id="country">
+        <div class="header_div card dropdown">
+            <button class="dropbtn" id="country" onclick="toggleCountryIndicators()"></button>
+            <div class="dropdown-content myDropdownCountryIndicators">
+                <div class="card" id="countryIndicators"></div>
             </div>
         </div>
-        <div class="header_div card">
-            <div id="event" onclick="info_evento()"></div>
+        <div class="header_div card dropdown">
+            <button class="dropbtn" id="event" onclick="toggleDescription()"></button>
+            <div class="dropdown-content myDropdownDescription">
+                <div class="card" id="description"></div>
+            </div>
         </div>
         <div class="header_div card">
             <div id="report">
@@ -45,9 +50,11 @@
         </div>
     </div>
     </div>
-
-    <div class="card" id="description">
+    
+    <div class="dropdown-content myDropdown">
+        <div class="card" id="description"></div>
     </div>
+    
 
 </body>
 <script src="./config/config.js"></script>
